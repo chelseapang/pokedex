@@ -7,21 +7,20 @@ import './App.css';
 
 function App() {
     const [robots, setRobots] = useState([])
-    const [pokemonList, setPokemonList] = useState([]);
+    const [pokemonNames, setPokemonNames] = useState([]);
     const [searchfield, setSearchfield] = useState('')
-    useEffect(() => {
-        const fetchPokemonList = async () => {
-          try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon');
-            const data = await response.json();
-            console.log(data)
-            const names = data.results.map((pokemon) => pokemon.name);
-            setPokemonList(names);
-          } catch (error) {
-            console.error('Error fetching Pokemon list:', error);
-          }
-        };
     
+    const fetchPokemonList = async () => {
+        try {
+          const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+          const data = await response.json();
+          const names = data.results.map((pokemon) => pokemon.name);
+          setPokemonNames(names);
+        } catch (error) {
+          console.error('Error fetching Pokemon list:', error);
+        }
+      };
+    useEffect(() => {
         fetchPokemonList();
       }, []); // Empty dependency array means this effect runs once when the component mounts
     
@@ -47,7 +46,7 @@ function App() {
                 <SearchBox searchChange={onSearchChange} />
                 <Scroll>
                     <ErrorBoundary>
-                        <CardList robots={filteredRobots} />
+                        <CardList names={pokemonNames} />
                     </ErrorBoundary>
                 </Scroll>
             </div>
