@@ -1,5 +1,7 @@
 .pagination-container {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
   
   .pagination-number {
@@ -7,19 +9,10 @@
     padding: 8px;
     cursor: pointer;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #E8FDF5;
   }
   
   .pagination-number.active {
-    background-color: #4caf50;
+    background-color: #e15239;
     color: white;
-    border: 1px solid #4caf50;
   }
-
-  
-  
-  
-  
-  
-  
-  

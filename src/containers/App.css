@@ -7,24 +7,11 @@
 
 h1 {
   font-family: 'SEGA LOGO FONT';
-  font-weight: 200;
-  color: #0ccac4
+  font-weight: 500;
+  color: #e15239
 }
 
-.pagination-container {
-  display: flex;
-}
-
-.pagination-number {
-  margin-right: 5px;
-  padding: 8px;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-}
-
-.pagination-number.active {
-  background-color: #4caf50;
-  color: white;
-  border: 1px solid #4caf50;
+body {
+  background: -webkit-linear-gradient(to right, #C4E0E5, #4CA1AF);
+  background: linear-gradient(to right, #C4E0E5, #4CA1AF);
 }
