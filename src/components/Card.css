@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+h2 {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #e15239;
+    text-align: center;
+    margin: 10px 0;
+}

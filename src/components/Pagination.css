@@ -9,7 +9,8 @@
     padding: 8px;
     cursor: pointer;
     border: 1px solid #ddd;
-    background-color: #E8FDF5;
+    background-color: #F6FFFE;
+    border-radius: 15px;
   }
   
   .pagination-number.active {

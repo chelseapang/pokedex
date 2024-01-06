@@ -8,7 +8,9 @@
 h1 {
   font-family: 'SEGA LOGO FONT';
   font-weight: 500;
-  color: #e15239
+  color: #e15239;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Border effect */
+  letter-spacing: 5px;
 }
 
 body {
