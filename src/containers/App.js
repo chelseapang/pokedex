@@ -6,47 +6,49 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import './App.css';
 
 function App() {
-    const [robots, setRobots] = useState([])
-    const [pokemonNames, setPokemonNames] = useState([]);
-    const [searchfield, setSearchfield] = useState('')
-    
+    const [pokemonList, setPokemonList] = useState([]);
+    const [searchfield, setSearchfield] = useState('');
+
     const fetchPokemonList = async () => {
         try {
-          const response = await fetch('https://pokeapi.co/api/v2/pokemon');
-          const data = await response.json();
-          const names = data.results.map((pokemon) => pokemon.name);
-          setPokemonNames(names);
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon');
+            const data = await response.json();
+            const pokemonDetailsPromises = data.results.map(async (pokemon) => {
+                const pokemonResponse = await fetch(pokemon.url);
+                const pokemonData = await pokemonResponse.json();
+                return {
+                    name: pokemon.name,
+                    imageUrl: pokemonData.sprites.front_default,
+                };
+            });
+            const pokemonDetails = await Promise.all(pokemonDetailsPromises);
+            setPokemonList(pokemonDetails);
         } catch (error) {
-          console.error('Error fetching Pokemon list:', error);
+            console.error('Error fetching Pokemon list:', error);
         }
-      };
-    useEffect(() => {
-        fetchPokemonList();
-      }, []); // Empty dependency array means this effect runs once when the component mounts
-    
+    };
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => { setRobots(users) });
-    }, [])
+        fetchPokemonList();
+    }, []); // Empty dependency array means this effect runs once when the component mounts
 
     const onSearchChange = (event) => {
         setSearchfield(event.target.value)
     }
 
-    const filteredRobots = robots.filter(robot => {
-        return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-    })
-    return (!robots.length) ?
+    const filteredPokemon = pokemonList.filter(pokemon => {
+        return pokemon.name.toLowerCase().includes(searchfield.toLowerCase());
+    });
+
+    return (!pokemonList.length) ?
         <h1>Loading</h1> :
         (
             <div className='tc'>
-                <h1 className='f1'>RoboFriends</h1>
+                <h1 className='f1'>Pokedex</h1>
                 <SearchBox searchChange={onSearchChange} />
                 <Scroll>
                     <ErrorBoundary>
-                        <CardList names={pokemonNames} />
+                        <CardList cards={filteredPokemon} />
                     </ErrorBoundary>
                 </Scroll>
             </div>
